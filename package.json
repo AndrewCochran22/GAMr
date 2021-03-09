@@ -9,9 +9,13 @@
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "connect-session-sequelize": "^7.1.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "express-es6-template-engine": "^2.2.3",
+    "express-session": "^1.17.1",
+    "faker": "^5.4.0",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.7",
     "pg": "^8.5.1",

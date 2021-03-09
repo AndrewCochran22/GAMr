@@ -1,13 +1,26 @@
 <html>
 
 <head>
-  <title>Express</title>
+  <title>GAMr</title>
   <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
-  <h1>Express</h1>
-  <p>Welcome to Express</p>
+  <h1>GAMr</h1>
+  <p>Welcome to GAMr</p>
+
+  <form method="POST" action="/users/login">
+    <h2>Login</h2>
+    <p>
+      <label for="email">Email</label><br>
+      <input type="text" name="email" id="email" required />
+    </p>
+    <p>
+      <label for="password">Password</label><br>
+      <input type="password" name="password" id="password" required />
+    </p>
+    <button type="submit">Login</button>
+  </form>
 </body>
 
 </html>

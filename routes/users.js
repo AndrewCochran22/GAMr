@@ -57,7 +57,9 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req,res) => {
   // check for email and password
   if (!req.body.email || !req.body.password) {
-    return res.status(422).json({ error: 'please include all required fields' }); 
+    return res.status(422).render( 'error', {
+      locals: { error: 'please include all required fields' }
+     }); 
   }
   // get user from db by email
   const user = await db.User.findOne({
@@ -67,20 +69,33 @@ router.post('/login', async (req,res) => {
   })
     // error if no user 
     if (!user) {
-      return res.status(404).json({ error: 'could not find user with that email' })
+      return res.status(404).render('error', { locals: { error: 'could not find user with that email' }})
     }
     console.log(req.body.password, user.password)
   // compare user input (password) to hash
   const match = await bcrypt.compare(req.body.password, user.password)
   // error if wrong
   if (!match) {
-    return res.status(401).json({ error: 'incorrect password' })
+    return res.status(401).render('error', { locals: { error: 'incorrect password' }})
   }
+
+  // set user data on session
+  req.session.user = user;
+
+  res.redirect('/games');
+
   // login
   res.json({ 
     success: 'logged in!', 
     user: user 
   })
+})
+
+router.get('/logout', (req, res) => {
+  // clear user data on session to logout
+  req.session.user = null;
+
+  res.redirect('/');
 })
 
 module.exports = router;
